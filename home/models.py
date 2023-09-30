@@ -6,40 +6,28 @@ class Upload(models.Model):
     def __str__(self):
         return self.caption
 
-class DemoTable(models.Model):
-    # string, number, date, time, 
-    # email, url, file, image, boolean, 
-    # choice, large text
-
-    gender_choices = (("M","Male",),
-                      ("F","Female"),
-                      ("NS","Not Specified"))
-    
-    name = models.CharField(max_length=30 )
-    age = models.IntegerField(null=True, blank=True)
-    price = models.DecimalField(max_digits=5, decimal_places=2)
-    created_at = models.DateField(auto_now_add=True) 
-    time = models.TimeField(auto_now_add=True)
-    timestamp = models.DateTimeField(auto_now_add=True)
-    email = models.EmailField(max_length=254)
-    url = models.URLField(max_length=200)
-    file = models.FileField(upload_to='files/')
-    avatar = models.ImageField(upload_to='avatars/')
-    is_active = models.BooleanField(default=True)
-    gender = models.CharField(max_length=2, choices=gender_choices)
-    description = models.TextField()
-
+class Photographer(models.Model):
+    name = models.CharField(max_length=100)
+    image = models.ImageField(upload_to='images/')
     def __str__(self):
         return self.name
     
-class Task(models.Model):
-    title = models.CharField(max_length=100)
-    given_to = models.CharField(max_length=50)
-    priorty = models.IntegerField()
-    created_at = models.DateTimeField(auto_now_add=True)
+class PhotographerProfile(models.Model):
+    gender_choices = ((0, "FEMALE"), (1, "MALE"), (2, "OTHER"))
+    photographer = models.OneToOneField(Photographer, on_delete=models.CASCADE, related_name='profile')
+    city = models.CharField(max_length=50)
+    gender = models.IntegerField(choices=gender_choices)
 
     def __str__(self):
-        return self.title
-
-
-# create a model for storing information about Places
+        return f"{self.photographer.name}"
+    
+class Team(models.Model):
+    name = models.CharField(max_length=100)
+    def __str__(self):
+        return self.name
+    
+class Player(models.Model):
+    name = models.CharField(max_length=100)
+    team = models.ForeignKey(Team, on_delete=models.DO_NOTHING, related_name='players')
+    def __str__(self):
+        return self.name
