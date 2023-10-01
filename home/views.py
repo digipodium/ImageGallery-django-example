@@ -20,4 +20,9 @@ def view_tags(request):
     return render(request, 'tags.html', {'tags': tags})
 
 def view_images(request):
-    pass
+    images = Image.objects.all()
+    return render(
+        request,
+        'index.html',
+        {'images': images}
+    )
