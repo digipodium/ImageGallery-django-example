@@ -32,7 +32,7 @@ def delete_image(request, id):
         image.delete()
     except:
         pass
-    return redirect('images')
+    return render(request, 'partials/image_list.html', {'images': Image.objects.all()})
 
 def view_categories(request):
     categories = Category.objects.all()

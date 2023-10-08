@@ -6,7 +6,7 @@
 <ul class="tags">
     <button 
         hx-get="{% url 'get_tags' %}" 
-        hx-swap="outerhtml" 
+        hx-swap="outerhtml  transition:true" 
         hx-target=".tags">
         Refresh
     </button>

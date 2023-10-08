@@ -1,14 +1,24 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Image Gallery</title>
     <script src="{% static 'js/htmx.min.js' %}" defer></script>
+    <!-- FontAwesome 6.2.0 CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
+        integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <!-- (Optional) Use CSS or JS implementation -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/js/all.min.js"
+        integrity="sha512-naukR7I+Nk6gp7p5TMA4ycgfxaZBJ7MO5iC3Fp6ySQyKFHOGfpkSZkYVWV5R7u7cfAicxanwYQ5D1e17EfJcMA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     {% block css %}{% endblock css %}
     <style>
-        *{
+        * {
             padding: 0;
             margin: 0;
             box-sizing: border-box;
@@ -16,27 +26,33 @@
             font-family: sans-serif;
             text-decoration: none;
         }
-        nav{
+
+        nav {
             background-color: #333;
             color: #fff;
             padding: 0 2rem;
         }
-        ul{
+
+        ul {
             list-style: none;
             display: flex;
             justify-content: flex-start;
         }
-        li{
+
+        li {
             padding: .8rem;
         }
-        a{
+
+        a {
             color: #fff;
         }
-        li:hover{
+
+        li:hover {
             background-color: #555;
         }
     </style>
 </head>
+
 <body>
     <nav>
         <ul>
@@ -47,7 +63,8 @@
     </nav>
     <main>
         {% block content %}
-        {% endblock %}     
+        {% endblock %}
     </main>
 </body>
+
 </html>
