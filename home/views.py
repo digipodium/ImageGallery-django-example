@@ -7,7 +7,13 @@ def add_category(request):
     pass
 
 def add_tag(request):
-    pass
+    if request.method == "POST":
+        name = request.POST.get('tag')
+        if len(name) > 2:
+            t = Tag(name=name) # new object of Tag
+            t.save() # save to database
+        return render(request,'partials/tag_form.html')   
+    return HttpResponse("<p>Invalid request</p>")
 
 def upload_image(request):
     if request.method == "POST":
@@ -28,7 +34,6 @@ def delete_image(request, id):
         pass
     return redirect('images')
 
-
 def view_categories(request):
     categories = Category.objects.all()
     return render(request, "index.html", {'categories': categories})
@@ -44,3 +49,8 @@ def view_images(request):
         'index.html',
         {'images': images}
     )
+
+
+def get_tags(request):
+    tags = Tag.objects.all()
+    return render(request, 'partials/tag_list.html', {'tags': tags})
